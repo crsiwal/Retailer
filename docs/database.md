@@ -37,3 +37,31 @@ CREATE TABLE prefix_users_meta (
     PRIMARY KEY (id)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 ```
+
+### User Active Data ( User Profile )
+```bash
+CREATE TABLE prefix_users_active (
+    id bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'Unique auto increment id',
+    user_id bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'User Unique auto increment id',
+    name varchar(128) NOT NULL DEFAULT '' COMMENT 'Full name of the user which will display',
+    icon_url varchar(1024) NOT NULL DEFAULT '' COMMENT 'User thumbnail url. By default will be user first name char image.',
+    language_id smallint unsigned NOT NULL DEFAULT 0 COMMENT 'User selects primary language for comunicate',
+    last_login_time datetime NOT NULL DEFAULT '2022-01-01 0:00:00' COMMENT 'When user last login to system',
+    last_active_time datetime NOT NULL DEFAULT '2022-01-01 0:00:00' COMMENT 'When user active last time',
+    PRIMARY KEY (id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
+```
+
+### User Location ( User Profile )
+```bash
+CREATE TABLE prefix_user_location (
+    id bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'Unique auto increment id',
+    user_id bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'User Unique auto increment id',
+    name varchar(128) NOT NULL DEFAULT '' COMMENT 'Full name of the user which will display',
+    icon_url varchar(1024) NOT NULL DEFAULT '' COMMENT 'User thumbnail url. By default will be user first name char image.',
+    language_id smallint unsigned NOT NULL DEFAULT 0 COMMENT 'User selects primary language for comunicate',
+    last_login_time datetime NOT NULL DEFAULT '2022-01-01 0:00:00' COMMENT 'When user last login to system',
+    last_active_time datetime NOT NULL DEFAULT '2022-01-01 0:00:00' COMMENT 'When user active last time',
+    PRIMARY KEY (id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
+```
