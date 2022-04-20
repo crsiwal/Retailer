@@ -87,29 +87,46 @@ CREATE TABLE prefix_countries(
 CREATE TABLE prefix_regions (
     id bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'Unique auto increment id',
     country_id bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'Country Primary id',
+    timezone_id bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'Timezone Primary id',
     by_user_id bigint unsigned NOT NULL COMMENT 'User Primary id',
-    label varchar(128) NOT NULL DEFAULT '' COMMENT 'User Status Label',
-    iso_two varchar(128) NOT NULL DEFAULT '' COMMENT 'User Status Label',
-    iso_three varchar(128) NOT NULL DEFAULT '' COMMENT 'User Status Label',
-    num_iso varchar(128) NOT NULL DEFAULT '' COMMENT 'User Status Label',
-    isd varchar(128) NOT NULL DEFAULT '' COMMENT 'User Status Label',
-    is_active varchar(128) NOT NULL DEFAULT '' COMMENT 'User Status Label',
+    label varchar(128) NOT NULL DEFAULT '' COMMENT 'Region Label',
+    is_active varchar(128) NOT NULL DEFAULT '' COMMENT 'Services are active in this region?',
 	created_time datetime NOT NULL COMMENT 'When added to system',
     update_time datetime DEFAULT NULL COMMENT 'When details updated',
     PRIMARY KEY (id)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 
-CREATE TABLE prefix_regions_neighbor(
+CREATE TABLE prefix_neighbor_regions(
     id bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'Unique auto increment id',
     by_user_id bigint unsigned NOT NULL COMMENT 'User Primary id',
     region_id bigint unsigned NOT NULL COMMENT 'Region Primary id',
-    neighbor_region_id bigint unsigned NOT NULL COMMENT 'Neighbor Primary id',
+    neighbor_region_id bigint unsigned NOT NULL COMMENT 'Neighbor Region Primary id',
 	created_time datetime NOT NULL COMMENT 'When added to system',
     update_time datetime DEFAULT NULL COMMENT 'When details updated',
     PRIMARY KEY (id)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 
-CREATE TABLE prefix_city () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
+CREATE TABLE prefix_cities (
+    id bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'Unique auto increment id',
+    country_id bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'Country Primary id',
+    region_id bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'Region Primary id',
+    by_user_id bigint unsigned NOT NULL COMMENT 'User Primary id',
+    label varchar(128) NOT NULL DEFAULT '' COMMENT 'City Label',
+    is_active varchar(128) NOT NULL DEFAULT '' COMMENT 'Services are active in this City?',
+	created_time datetime NOT NULL COMMENT 'When added to system',
+    update_time datetime DEFAULT NULL COMMENT 'When details updated',
+    PRIMARY KEY (id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
+
+CREATE TABLE prefix_neighbor_cities(
+    id bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'Unique auto increment id',
+    by_user_id bigint unsigned NOT NULL COMMENT 'User Primary id',
+    city_id bigint unsigned NOT NULL COMMENT 'Region Primary id',
+    neighbor_city_id bigint unsigned NOT NULL COMMENT 'Neighbor Region Primary id',
+	created_time datetime NOT NULL COMMENT 'When added to system',
+    update_time datetime DEFAULT NULL COMMENT 'When details updated',
+    PRIMARY KEY (id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 
 
 
