@@ -108,9 +108,9 @@ CREATE TABLE prefix_neighbor_regions(
 
 CREATE TABLE prefix_cities (
     id bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'Unique auto increment id',
+    by_user_id bigint unsigned NOT NULL COMMENT 'User Primary id',
     country_id bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'Country Primary id',
     region_id bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'Region Primary id',
-    by_user_id bigint unsigned NOT NULL COMMENT 'User Primary id',
     label varchar(128) NOT NULL DEFAULT '' COMMENT 'City Label',
     is_active varchar(128) NOT NULL DEFAULT '' COMMENT 'Services are active in this City?',
 	created_time datetime NOT NULL COMMENT 'When added to system',
@@ -121,8 +121,77 @@ CREATE TABLE prefix_cities (
 CREATE TABLE prefix_neighbor_cities(
     id bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'Unique auto increment id',
     by_user_id bigint unsigned NOT NULL COMMENT 'User Primary id',
-    city_id bigint unsigned NOT NULL COMMENT 'Region Primary id',
-    neighbor_city_id bigint unsigned NOT NULL COMMENT 'Neighbor Region Primary id',
+    city_id bigint unsigned NOT NULL COMMENT 'City Primary id',
+    neighbor_city_id bigint unsigned NOT NULL COMMENT 'Neighbor City Primary id',
+	created_time datetime NOT NULL COMMENT 'When added to system',
+    update_time datetime DEFAULT NULL COMMENT 'When details updated',
+    PRIMARY KEY (id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
+
+CREATE TABLE prefix_timezone (
+    id bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'Unique auto increment id',
+    by_user_id bigint unsigned NOT NULL COMMENT 'User Primary id',
+    label varchar(128) NOT NULL DEFAULT '' COMMENT 'Timezone Label',
+    is_active varchar(128) NOT NULL DEFAULT '' COMMENT 'Services are active in this Timezone?',
+	created_time datetime NOT NULL COMMENT 'When added to system',
+    update_time datetime DEFAULT NULL COMMENT 'When details updated',
+    PRIMARY KEY (id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
+
+CREATE TABLE prefix_currency (
+    id bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'Unique auto increment id',
+    by_user_id bigint unsigned NOT NULL COMMENT 'User Primary id',
+    label varchar(128) NOT NULL DEFAULT '' COMMENT 'Currency Label eg. Rupees',
+    code varchar(128) NOT NULL DEFAULT '' COMMENT 'Currency Code eg. INR',
+    symbol varchar(128) NOT NULL DEFAULT '' COMMENT 'Currency Synbol eg. $',
+	created_time datetime NOT NULL COMMENT 'When added to system',
+    update_time datetime DEFAULT NULL COMMENT 'When details updated',
+    PRIMARY KEY (id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
+
+CREATE TABLE prefix_postal_codes (
+    id bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'Unique auto increment id',
+    by_user_id bigint unsigned NOT NULL COMMENT 'User Primary id',
+    country_id bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'Country Primary id',
+    region_id bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'Region Primary id',
+    city_id bigint unsigned NOT NULL COMMENT 'City Primary id',
+    code varchar(128) NOT NULL DEFAULT '' COMMENT 'Currency Code eg. INR',
+	is_active varchar(128) NOT NULL DEFAULT '' COMMENT 'Services are active in this Timezone?',
+	created_time datetime NOT NULL COMMENT 'When added to system',
+    update_time datetime DEFAULT NULL COMMENT 'When details updated',
+    PRIMARY KEY (id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
+
+CREATE TABLE prefix_user_type (
+    id bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'Unique auto increment id',
+    by_user_id bigint unsigned NOT NULL COMMENT 'User Primary id',
+    label varchar(128) NOT NULL DEFAULT '' COMMENT 'User type Label',
+    codekey varchar(128) NOT NULL DEFAULT '' COMMENT 'Usertype key for programming',
+    summery varchar(128) NOT NULL DEFAULT '' COMMENT 'Currency Code eg. INR',
+	created_time datetime NOT NULL COMMENT 'When added to system',
+    update_time datetime DEFAULT NULL COMMENT 'When details updated',
+    PRIMARY KEY (id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
+
+CREATE TABLE prefix_user_role (
+    id bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'Unique auto increment id',
+    by_user_id bigint unsigned NOT NULL COMMENT 'User Primary id',
+    user_type_id bigint unsigned NOT NULL COMMENT 'User Primary id',
+    store_id bigint unsigned NOT NULL COMMENT 'User Primary id',
+    label varchar(128) NOT NULL DEFAULT '' COMMENT 'User type Label',
+    summery varchar(128) NOT NULL DEFAULT '' COMMENT 'Currency Code eg. INR',
+	is_user_defined tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Is this created by retailer?',
+	created_time datetime NOT NULL COMMENT 'When added to system',
+    update_time datetime DEFAULT NULL COMMENT 'When details updated',
+    PRIMARY KEY (id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
+
+CREATE TABLE prefix_access_groups (
+    id bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'Unique auto increment id',
+    by_user_id bigint unsigned NOT NULL COMMENT 'User Primary id',
+    label varchar(128) NOT NULL DEFAULT '' COMMENT 'Group name',
+    codekey varchar(128) NOT NULL DEFAULT '' COMMENT 'Key used for programming',
+    summery varchar(128) NOT NULL DEFAULT '' COMMENT 'Group summery',
 	created_time datetime NOT NULL COMMENT 'When added to system',
     update_time datetime DEFAULT NULL COMMENT 'When details updated',
     PRIMARY KEY (id)
@@ -130,17 +199,12 @@ CREATE TABLE prefix_neighbor_cities(
 
 
 
-
-CREATE TABLE prefix_user_type () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
-CREATE TABLE prefix_user_role () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
-CREATE TABLE prefix_access_groups () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 CREATE TABLE prefix_feature_access () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 CREATE TABLE prefix_role_permission () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 CREATE TABLE prefix_language () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 CREATE TABLE prefix_config_items () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 CREATE TABLE prefix_category () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 CREATE TABLE prefix_tags () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
-CREATE TABLE prefix_currency () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 CREATE TABLE prefix_variations () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 CREATE TABLE prefix_stores () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 CREATE TABLE prefix_store_user_role () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
@@ -153,7 +217,6 @@ CREATE TABLE prefix_orders () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = u
 CREATE TABLE prefix_store_role () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 CREATE TABLE prefix_store_location () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 CREATE TABLE prefix_postal_codes () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
-CREATE TABLE prefix_timezone () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 CREATE TABLE prefix_config_groups () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 CREATE TABLE prefix_location () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 
