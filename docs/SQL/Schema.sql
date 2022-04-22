@@ -197,11 +197,39 @@ CREATE TABLE prefix_access_groups (
     PRIMARY KEY (id)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 
+CREATE TABLE prefix_permissions (
+    id bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'Unique auto increment id',
+    by_user_id bigint unsigned NOT NULL COMMENT 'User Primary id',
+    group_id bigint unsigned NOT NULL COMMENT 'Access Group Primary id',
+    label varchar(128) NOT NULL DEFAULT '' COMMENT 'Feature name',
+    codekey varchar(128) NOT NULL DEFAULT '' COMMENT 'Key used for programming',
+    summery varchar(128) NOT NULL DEFAULT '' COMMENT 'Permission summery',
+	created_time datetime NOT NULL COMMENT 'When added to system',
+    update_time datetime DEFAULT NULL COMMENT 'When details updated',
+    PRIMARY KEY (id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 
+CREATE TABLE prefix_role_permission (
+    id bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'Unique auto increment id',
+    by_user_id bigint unsigned NOT NULL COMMENT 'User Primary id',
+    permission_id bigint unsigned NOT NULL COMMENT 'Access Group Primary id',
+    user_role_id bigint unsigned NOT NULL COMMENT 'Access Group Primary id',
+    is_active tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Is this created by retailer?',
+	created_time datetime NOT NULL COMMENT 'When added to system',
+    update_time datetime DEFAULT NULL COMMENT 'When details updated',
+    PRIMARY KEY (id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 
-CREATE TABLE prefix_feature_access () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
-CREATE TABLE prefix_role_permission () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
-CREATE TABLE prefix_language () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
+CREATE TABLE prefix_language (
+    id bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'Unique auto increment id',
+    by_user_id bigint unsigned NOT NULL COMMENT 'User Primary id',
+    english varchar(128) NOT NULL DEFAULT '' COMMENT 'User type Label',
+    native varchar(128) NOT NULL DEFAULT '' COMMENT 'User type Label',
+    is_active tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Is this created by retailer?',
+	created_time datetime NOT NULL COMMENT 'When added to system',
+    update_time datetime DEFAULT NULL COMMENT 'When details updated',
+    PRIMARY KEY (id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 CREATE TABLE prefix_config_items () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 CREATE TABLE prefix_category () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 CREATE TABLE prefix_tags () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
