@@ -223,16 +223,57 @@ CREATE TABLE prefix_role_permission (
 CREATE TABLE prefix_language (
     id bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'Unique auto increment id',
     by_user_id bigint unsigned NOT NULL COMMENT 'User Primary id',
-    english varchar(128) NOT NULL DEFAULT '' COMMENT 'User type Label',
-    native varchar(128) NOT NULL DEFAULT '' COMMENT 'User type Label',
-    is_active tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Is this created by retailer?',
+    english varchar(128) NOT NULL DEFAULT '' COMMENT 'English name eg. Hindi',
+    native varchar(128) NOT NULL DEFAULT '' COMMENT 'Language name in own characters eg. हिन्दी',
+    is_active tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Is this active?',
 	created_time datetime NOT NULL COMMENT 'When added to system',
     update_time datetime DEFAULT NULL COMMENT 'When details updated',
     PRIMARY KEY (id)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
-CREATE TABLE prefix_config_items () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
-CREATE TABLE prefix_category () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
-CREATE TABLE prefix_tags () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
+
+CREATE TABLE prefix_config_items (
+    id bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'Unique auto increment id',
+    by_user_id bigint unsigned NOT NULL COMMENT 'User Primary id',
+    user_id bigint unsigned NOT NULL COMMENT 'User Primary id',
+    group_id bigint unsigned NOT NULL COMMENT 'Group Primary id',
+    codekey varchar(128) NOT NULL DEFAULT '' COMMENT 'Configuration name code used in programming',
+    content varchar(128) NOT NULL DEFAULT '' COMMENT 'Configuration value set by user',
+    is_active tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Is this active?',
+	created_time datetime NOT NULL COMMENT 'When added to system',
+    update_time datetime DEFAULT NULL COMMENT 'When details updated',
+    PRIMARY KEY (id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
+
+CREATE TABLE prefix_config_groups (
+    id bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'Unique auto increment id',
+    by_user_id bigint unsigned NOT NULL COMMENT 'User Primary id',
+    label varchar(128) NOT NULL DEFAULT '' COMMENT 'Configuration group name',
+    created_time datetime NOT NULL COMMENT 'When added to system',
+    update_time datetime DEFAULT NULL COMMENT 'When details updated',
+    PRIMARY KEY (id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
+
+CREATE TABLE prefix_category (
+    id bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'Unique auto increment id',
+    by_user_id bigint unsigned NOT NULL COMMENT 'User Primary id',
+    parent_id bigint unsigned NOT NULL COMMENT 'User Primary id',
+    name varchar(128) NOT NULL DEFAULT '' COMMENT 'Configuration name code used in programming',
+    slug varchar(128) NOT NULL DEFAULT '' COMMENT 'Configuration value set by user',
+    is_user_defined tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Is this created by retailer?',
+	is_active tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Is this active?',
+	created_time datetime NOT NULL COMMENT 'When added to system',
+    update_time datetime DEFAULT NULL COMMENT 'When details updated',
+    PRIMARY KEY (id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
+
+CREATE TABLE prefix_tags (
+    id bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'Unique auto increment id',
+    slug varchar(128) NOT NULL DEFAULT '' COMMENT 'Configuration name code used in programming',
+	created_time datetime NOT NULL COMMENT 'When added to system',
+    PRIMARY KEY (id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
+
+
 CREATE TABLE prefix_variations () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 CREATE TABLE prefix_stores () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 CREATE TABLE prefix_store_user_role () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
@@ -245,7 +286,6 @@ CREATE TABLE prefix_orders () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = u
 CREATE TABLE prefix_store_role () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 CREATE TABLE prefix_store_location () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 CREATE TABLE prefix_postal_codes () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
-CREATE TABLE prefix_config_groups () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 CREATE TABLE prefix_location () ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_general_ci;
 
 
